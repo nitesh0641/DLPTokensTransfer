@@ -22,6 +22,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
+// var port = process.env.PORT || 8000;
+var port = 8000;
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
@@ -38,4 +41,6 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+app.listen(port);
 module.exports = app;
+
