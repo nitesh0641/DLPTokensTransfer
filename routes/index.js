@@ -18,7 +18,7 @@ var addr = web3.eth.accounts[0];
 var web3Message = '';
 
 // -- admin part -- //
-router.post('getBalance', function(req, res, next){
+router.post('/getBalance', function(req, res, next){
 	var balanceOf = req.body.address;
 	web3Message = admin.balance(web3, balanceOf);
 
