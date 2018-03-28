@@ -37,17 +37,36 @@ router.post('/sendFund', function(req, res, next) {
 	from = req.body.from;
 	to = req.body.to;
 	unit = req.body.unit;
-	web3Message = admin.transfer(web3, from, to, unit);
+	gasLimit = 4700000;
+	gasPrice = 41000000000; //-- in GWei
+
+	web3Message = admin.transfer(web3, from, to, unit, gasLimit, gasPrice);
 
 	res.render({transactionHash: web3Message});
 });
 
 router.post('/getTokenBalance', function(req, res, next){
-	var balanceOf = req.body.address;
-	var dlptToken = web3.eth.contract(contractABI).at(contractAddress);	
+	var dlptToken = web3.eth.contract(contractABI).at(contractAddress);
+
+	var balanceOf = req.body.address;	
 	web3Message = admin.tBalance(dlptToken, balanceOf);
 
 	res.json({balance:web3Message});
+});
+
+router.post('/approveContract', function(req, res, next){
+	var dlptToken = web3.eth.contract(contractABI).at(contractAddress);
+	
+	accOwner = req.body.accId;
+	accPass = req.body.accPass;
+	coinUnit = req.body.unit;
+	gasLimit = 4700000;
+	gasPrice = 41000000000; //-- in GWei
+
+	web3.personal.unlockAccount(accOwner, accPass, 15000);
+	web3Message = admin.tApproveAcc(dlptToken, accOwner, transferContractAddress, coinUnit, gasLimit, gasPrice);
+
+	res.json({message: web3Message});
 });
 
 module.exports = router;
