@@ -1,10 +1,12 @@
 {
   "name": "dlptokenstransfer",
-  "version": "0.0.0",
-  "private": true,
+  "version": "1.0.0",
+  "description": "A simple DAPP to access erc20 tokens and to perform multiple operations on tokens..",
   "scripts": {
     "start": "node ./bin/www"
   },
+  "author": "Nitesh Chaudhry",
+  "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.2",
     "browserify": "^16.1.1",
