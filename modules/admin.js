@@ -7,5 +7,8 @@ module.exports = {
 	},
 	balance: function(web3, addr){
 		return web3.fromWei(web3.eth.getBalance(addr), "ether");
+	},
+	tBalance: function(token, addr) {
+		return token.balanceOf.call(addr).toString(10);
 	}
 };

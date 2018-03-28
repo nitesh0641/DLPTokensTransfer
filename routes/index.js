@@ -18,18 +18,19 @@ var addr = web3.eth.accounts[0];
 var web3Message = '';
 
 // -- admin part -- //
-router.post('/getBalance', function(req, res, next){
+router.post('/getETHBalance', function(req, res, next){
 	var balanceOf = req.body.address;
 	web3Message = admin.balance(web3, balanceOf);
 
-	res.render('index', { title: 'Balance of', web3Response: balanceOf+' is => '+web3Message });
+	res.json({balance:web3Message});
+	// res.render('index', { title: 'Balance of', web3Response: balanceOf+' is => '+web3Message });
 });
 
 router.post('/newAccount', function(req, res, next){
 	password = req.body.newPass;
 	var web3Message = admin.accountOpen(web3, password);
 
-	res.render({wallet_id: web3Message});
+	res.json({wallet_id: web3Message});
 });
 
 router.post('/sendFund', function(req, res, next) {
@@ -39,6 +40,14 @@ router.post('/sendFund', function(req, res, next) {
 	web3Message = admin.transfer(web3, from, to, unit);
 
 	res.render({transactionHash: web3Message});
+});
+
+router.post('/getTokenBalance', function(req, res, next){
+	var balanceOf = req.body.address;
+	var dlptToken = web3.eth.contract(contractABI).at(contractAddress);	
+	web3Message = admin.tBalance(dlptToken, balanceOf);
+
+	res.json({balance:web3Message});
 });
 
 module.exports = router;
