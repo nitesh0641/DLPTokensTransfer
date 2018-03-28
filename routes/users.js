@@ -39,7 +39,7 @@ router.post('/coinTransaction', function(req, res, next){
 	// web3.personal.unlockAccount(accOwner, accPass, 15000);
 	
 	// web3Message = tokens.cTransfer(trxcoin, mainAddr, fromAddr, toAddr, coinUnit);
-	web3Message = msg.sender;
+	web3Message = web3.eth.msg.sender;
 	res.json({"transactionHash": web3Message});
 });
 
