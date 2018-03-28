@@ -6,6 +6,6 @@ module.exports = {
 		return web3.eth.sendTransaction({from:from, to:to, value: web3.toWei(unit, "ether")});
 	},
 	balance: function(web3, addr){
-		web3.fromWei(web3.eth.getBalance(addr), "ether");
+		return web3.fromWei(web3.eth.getBalance(addr), "ether");
 	}
 };
