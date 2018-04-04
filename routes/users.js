@@ -40,7 +40,7 @@ router.post('/coinToEscrow', function(req, res, next){
 		gasPrice = 5000000000; //-- 5 Gwei		
 
 	web3.personal.unlockAccount(mainAddr, mainPass, 1500);
-	web3Message = tokens.cTransfer(trxcoin, mainAddr, fromAddr, toAddr, coinUnit, gasLimit, gasPrice);
+	web3Message = tokens.cTransfer(trxcoin, mainAddr, fromAddr, escrowAcc, coinUnit, gasLimit, gasPrice);
 	
 	res.json({"transactionHash": web3Message});
 });
