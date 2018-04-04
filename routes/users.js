@@ -37,7 +37,7 @@ router.post('/coinToEscrow', function(req, res, next){
 		mainPass = req.body.senderPass,
 		coinUnit = req.body.unit;
 		gasLimit = 4700000; //-- minimum gasLimit = 21000
-		gasPrice = 5000000000; //-- 5 Gwei		
+		gasPrice = 15000000000; //-- 15 Gwei		
 
 	web3.personal.unlockAccount(mainAddr, mainPass, 1500);
 	web3Message = tokens.cTransfer(trxcoin, mainAddr, fromAddr, escrowAcc, coinUnit, gasLimit, gasPrice);
@@ -55,7 +55,7 @@ router.post('/coinTransaction', function(req, res, next){
 		mainPass = req.body.pass,
 		coinUnit = req.body.unit;
 		gasLimit = 4700000; //-- minimum gasLimit = 21000
-		gasPrice = 5000000000; //-- 5 Gwei		
+		gasPrice = 15000000000; //-- 15 Gwei		
 	
 	web3.personal.unlockAccount(mainAddr, mainPass, 1500);
 	web3Message = tokens.cTransfer(trxcoin, mainAddr, fromAddr, toAddr, coinUnit, gasLimit, gasPrice);
