@@ -8,8 +8,8 @@ module.exports = {
 	cAddress: function(contract) {
 		return contract.getContractAddr.call();
 	},
-	cTransfer: function(contract, mainAddr, fromAddress, toAddress, units) {
-		return contract.transfer.sendTransaction(fromAddress,toAddress,units,{from:mainAddr,gas:4700000,gasPrice:41000000000});
+	cTransfer: function(contract, mainAddr, fromAddress, toAddress, units, gasLimit, gasPrice) {
+		return contract.transfer.sendTransaction(fromAddress,toAddress,units,{from:mainAddr,gas:gasLimit,gasPrice:gasPrice});
 		// return contract.transfer(fromAddress, toAddress, units);
 	}
 };

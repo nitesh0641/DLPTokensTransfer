@@ -30,16 +30,20 @@ router.post('/getTokenBalance', function(req, res, next){
 router.post('/coinTransaction', function(req, res, next){
 	//--dealing with my contract--//
 	var trxcoin = web3.eth.contract(transferContractABI).at(transferContractAddress);
-	// var web3Message = "Contract address is => "+tokens.cAddress(trxcoin);
 
-	// var fromAddr = req.body.from,
-	// 	toAddr = req.body.to,
-	// 	mainAddr = addr,
-	// 	coinUnit = req.body.unit;
-	// web3.personal.unlockAccount(accOwner, accPass, 15000);
+	var escrowAcc = "0xb9a12f2b065491d7a3b8682c6bd4228b78c66fca",
+		accPass = "qwedsa";
+	web3.personal.unlockAccount(escrowAcc, accPass, 1500);
+
+	var fromAddr = req.body.from,
+		toAddr = req.body.to,
+		mainAddr = escrowAcc,
+		coinUnit = req.body.unit;
+		gasLimit = 4700000; //-- minimum gasLimit = 21000
+		gasPrice = 5000000000; //-- 5 Gwei		
 	
-	// web3Message = tokens.cTransfer(trxcoin, mainAddr, fromAddr, toAddr, coinUnit);
-	web3Message = web3.eth.msg.sender;
+	web3Message = tokens.cTransfer(trxcoin, mainAddr, fromAddr, toAddr, coinUnit, gasLimit, gasPrice);
+	
 	res.json({"transactionHash": web3Message});
 });
 

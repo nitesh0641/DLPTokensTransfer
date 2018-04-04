@@ -38,7 +38,7 @@ router.post('/sendFund', function(req, res, next) {
 	to = req.body.to;
 	unit = req.body.unit;
 	gasLimit = 4700000;
-	gasPrice = 41000000000; //-- in GWei
+	gasPrice = 41000000000; //-- 41 Gwei
 
 	web3Message = admin.transfer(web3, from, to, unit, gasLimit, gasPrice);
 
@@ -61,7 +61,7 @@ router.post('/approveContract', function(req, res, next){
 	accPass = req.body.accPass;
 	coinUnit = req.body.unit;
 	gasLimit = 4700000;
-	gasPrice = 41000000000; //-- in GWei
+	gasPrice = 41000000000; //-- 41 Gwei
 
 	web3.personal.unlockAccount(accOwner, accPass, 15000);
 	web3Message = admin.tApproveAcc(dlptToken, accOwner, transferContractAddress, coinUnit, gasLimit, gasPrice);
