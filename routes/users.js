@@ -37,7 +37,7 @@ router.post('/coinToEscrow', function(req, res, next){
 		mainPass = req.body.senderPass,
 		coinUnit = req.body.unit;
 		gasLimit = 4700000; //-- minimum gasLimit = 21000
-		gasPrice = 15000000000; //-- 15 Gwei		
+		gasPrice = 41000000000; //-- 41 Gwei		
 
 	web3.personal.unlockAccount(mainAddr, mainPass, 1500);
 	web3Message = tokens.cTransfer(trxcoin, mainAddr, fromAddr, escrowAcc, coinUnit, gasLimit, gasPrice);
@@ -55,13 +55,33 @@ router.post('/coinTransaction', function(req, res, next){
 		mainPass = req.body.pass,
 		coinUnit = req.body.unit;
 		gasLimit = 4700000; //-- minimum gasLimit = 21000
-		gasPrice = 15000000000; //-- 15 Gwei		
+		gasPrice = 41000000000; //-- 41 Gwei		
 	
 	web3.personal.unlockAccount(mainAddr, mainPass, 1500);
 	web3Message = tokens.cTransfer(trxcoin, mainAddr, fromAddr, toAddr, coinUnit, gasLimit, gasPrice);
 	
 	res.json({"transactionHash": web3Message});
 });
+
+router.post('/retryCoinTransaction', function(req, res, next){
+	//--dealing with my contract--//
+	var trxcoin = web3.eth.contract(transferContractABI).at(transferContractAddress);
+
+	var fromAddr = req.body.from,
+		toAddr = req.body.to,
+		mainAddr = fromAddr,
+		mainPass = req.body.pass,
+		coinUnit = req.body.unit;
+		gasLimit = 4700000; //-- minimum gasLimit = 21000
+		gasPrice = 15000000000; //-- 41 Gwei		
+	
+	web3.personal.unlockAccount(mainAddr, mainPass, 1500);
+	web3Message = tokens.cTransfer(trxcoin, mainAddr, fromAddr, toAddr, coinUnit, gasLimit, gasPrice);
+	
+	res.json({"transactionHash": web3Message});
+});
+
+
 
 // /* GET users listing. */
 // router.get('/', function(req, res, next) {

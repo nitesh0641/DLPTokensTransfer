@@ -11,6 +11,9 @@ module.exports = {
 	cTransfer: function(contract, mainAddr, fromAddress, toAddress, units, gasLimit, gasPrice) {
 		return contract.transfer.sendTransaction(fromAddress,toAddress,units,{from:mainAddr,gas:gasLimit,gasPrice:gasPrice});
 		// return contract.transfer(fromAddress, toAddress, units);
+	},
+	retryTransfer: function(contract, mainAddr, fromAddress, toAddress, units, nonce, gasLimit, gasPrice) {
+		return contractInstance.transfer.sendTransaction(fromAddress,toAddress,units,{from:mainAddr,nonce:nonce,gas:gasLimit,gasPrice:gasPrice})
 	}
 };
 
