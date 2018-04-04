@@ -43,7 +43,7 @@ router.post('/sendFund', function(req, res, next) {
 	web3.personal.unlockAccount(from, "Default@123", 1500);
 	web3Message = admin.transfer(web3, from, to, unit, gasLimit, gasPrice);
 
-	res.render({transactionHash: web3Message});
+	res.json({transactionHash: web3Message});
 });
 
 router.post('/getTokenBalance', function(req, res, next){
