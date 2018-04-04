@@ -34,7 +34,7 @@ router.post('/coinToEscrow', function(req, res, next){
 	var fromAddr = req.body.from,
 		escrowAcc = req.body.to,
 		mainAddr = fromAddr,
-		mainPass = req.body.pass,
+		mainPass = req.body.senderPass,
 		coinUnit = req.body.unit;
 		gasLimit = 4700000; //-- minimum gasLimit = 21000
 		gasPrice = 5000000000; //-- 5 Gwei		
